@@ -72,9 +72,18 @@ body {
   transition: .1s ease-in-out;
 }
 
-.container button:active {
+.container button.special {
+  background-color: #ec880e;
+  color: #3a2512;
+}
+
+.container button:active, .container button.disabled {
   box-shadow: 0px 0px 0px 6px #232227;
   transform: scale(90%);
+}
+
+.container button.disabled {
+  background-color: #232227;
 }
 
 #screen::before {
@@ -106,6 +115,24 @@ body {
 
   display: flex;
   align-items: center;
+  justify-content: flex-end;
 
   box-shadow: 0px -5px 0px 0px #34333c;
+  overflow: hidden;
+}
+
+.throb {
+  background-color: brown!important;
+  color: white!important;
+
+  animation-name: throbanimation;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes throbanimation {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
 }
