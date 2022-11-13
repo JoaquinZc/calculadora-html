@@ -22,7 +22,7 @@ function showResult(result, show = true) {
   const screen = getScreen();
 
   if(isNaN(result)) {
-    const button = document.querySelector(".special");
+    const button = document.querySelectorAll(".special")[1];
     button?.classList.contains("throb") === false && button.classList.add("throb");
     return screen.innerHTML = MESSAGE_ERROR;
   }
@@ -40,7 +40,7 @@ function clearCalc(all, clearValue=true) {
     lastValue = "0";
     currentOperation = "none";
 
-    const button = document.querySelector(".special");
+    const button = document.querySelectorAll(".special")[1];
     button?.classList.contains("throb") === true && button.classList.remove("throb");
   
     document.querySelectorAll(".two").forEach(button => (
@@ -68,6 +68,7 @@ function resolveOperation() {
     operation === "-" ? (last - now) :
     operation === "/" ? (last / now) :
     operation === "*" ? (last * now) :
+    operation === "%" ? (last * (now / 100)) :
     NaN;
 
   !isNaN(result) && clearCalc(true, false);
@@ -142,12 +143,12 @@ function onClickButton() {
   const key = this.innerText ?? "none";
   const screen = getScreen();
 
-  if(screen.innerHTML === MESSAGE_ERROR && key !== "CE") {
+  if(screen.innerHTML === MESSAGE_ERROR && key !== "C") {
     return ;
   }
 
   if(key === "CE" || key == "C") {
-    clearCalc(key === "CE");
+    clearCalc(key === "C");
   }
   else if(key.search(/^[0-9\.]$/) !== -1) {
     addNumber(key);
